@@ -1,0 +1,109 @@
+{
+  "name": "fspubtest1234",
+  "version": "1.2.2",
+  "description": "A github flow documentation starter project by Firefly Semantics",
+  "main": "./build/index.bundle.js",
+  "type": "module",
+  "types": "./build/index.d.ts",
+  "module": "./build/index.js",
+  "lint-staged": {
+    "*.ts": "npm run lint:eslint",
+    "*.{js,ts,css,md}": "prettier --write"
+  },
+  "scripts": {
+    "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --write",
+    "lint:eslint": "npx eslint .",
+    "clean:build": "rimraf build",
+    "build": "npm run clean:build && tsc",
+    "build:watch": "npm run clean:build && tsc --watch",
+    "test": "npm run test:dev && npm run test:prod",
+    "test:dev": "npm run build && wtr",
+    "test:watch": "npm run build && wtr --watch",
+    "test:prod": "npm run build && MODE=prod wtr",
+    "test:prod:watch": "npm run build && MODE=prod wtr --watch",
+    "doc": "rimraf doc && typedoc --entryPointStrategy expand ./src --out doc --exclude **/*.spec.ts",
+    "sdoc": "npm run doc && http-server -o doc",
+    "clean:doc": "rimraf doc",
+    "rollup": "npm run build && rollup -c",
+    "checksize": "npm run rollup && cat ./build/index.bundled.js | gzip -9 | wc -c && rimraf ./build/index.bundled.js",
+    "release": "npx release-it",
+    "prepare": "husky"
+  },
+  "bugs": "https://github.com/fireflysemantics/fs-typescript-starter/issues",
+  "homepage": "https://github.com/fireflysemantics/fs-typescript-starter/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fireflysemantics/fs-typescript-starter.git"
+  },
+  "keywords": [
+    "starter-project",
+    "github",
+    "flow",
+    "pull-requests",
+    "README",
+    "LICENSE",
+    "Typescript"
+  ],
+  "author": "Firefly Semantics Corporation",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/js": "^9.7.0",
+    "@open-wc/testing": "^4.0.0",
+    "@release-it/conventional-changelog": "^8.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.7",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/eslint__js": "^8.42.3",
+    "@types/mocha": "^10.0.7",
+    "@web/dev-server": "^0.4.6",
+    "@web/dev-server-legacy": "^2.1.1",
+    "@web/test-runner": "^0.18.2",
+    "@web/test-runner-playwright": "^0.11.0",
+    "eslint": "^8.57.0",
+    "http-server": "^14.1.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.3",
+    "release-it": "^17.4.0",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.18.1",
+    "rollup-plugin-summary": "^2.0.1",
+    "typedoc": "^0.26.4",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.16.0"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release ${version}"
+    },
+    "github": {
+      "release": false
+    },
+    "npm": {
+      "publish": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "preset": {
+          "name": "conventionalcommits",
+          "type": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "fspubtest1234": "^1.2.2"
+  }
+}

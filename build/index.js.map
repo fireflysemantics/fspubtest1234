@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/index.ts"],"names":[],"mappings":"AAAA,cAAc,yBAAyB,CAAC;AAExC,MAAM,OAAO,MAAM;IAAnB;QACI,SAAI,GAAW,KAAK,CAAC;IACzB,CAAC;CAAA","sourcesContent":["export * from './hello-world.component';\n\nexport class Person {\n    name: string = 'Ole';\n}"]}
